@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover — GTA 6-style cover maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo" aria-hidden="true"><span class="sun"></span><span class="palm">🌴</span></div>
+  <div>
+    <h1>VICE COVER</h1>
+    <p class="tagline">Turn your photo into GTA 6-style cover art — offline, in your browser.</p>
+  </div>
+  <div class="topbar-note">100% offline · photos never leave this machine</div>
+</header>
+
+<main class="layout">
+  <section class="controls" aria-label="Cover controls">
+    <div class="group">
+      <h2>1 · Photo</h2>
+      <button id="upload-btn" class="btn primary" type="button">Upload photo</button>
+      <input id="file-input" type="file" accept="image/*" multiple hidden>
+      <p class="hint">…or drag &amp; drop a photo onto the preview. Click a panel, then drag it to pan and scroll to zoom.</p>
+      <div class="samples">
+        <span class="label">Try a sample:</span>
+        <button class="sample-btn" type="button" data-sample="Sunset Blvd">Sunset Blvd</button>
+        <button class="sample-btn" type="button" data-sample="Neon Pier">Neon Pier</button>
+        <button class="sample-btn" type="button" data-sample="Pastel City">Pastel City</button>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>2 · Panels</h2>
+      <div class="segmented">
+        <button type="button" data-layout="single" title="One full photo">1 panel</button>
+        <button type="button" data-layout="duo" title="Two angled panels">2 panels</button>
+        <button type="button" data-layout="trio" title="One big, two small">3 panels</button>
+        <button type="button" data-layout="quad" title="Four-panel grid">4 panels</button>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>3 · Colour grade</h2>
+      <div class="segmented">
+        <button type="button" data-grade="sunset"><span class="swatch sunset"></span>Sunset</button>
+        <button type="button" data-grade="neon"><span class="swatch neon"></span>Neon</button>
+        <button type="button" data-grade="day"><span class="swatch day"></span>Day</button>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>4 · Export size</h2>
+      <div class="segmented">
+        <button type="button" data-size="square">1080 × 1080</button>
+        <button type="button" data-size="portrait">1080 × 1350</button>
+        <button type="button" data-size="wide">1920 × 1080</button>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>5 · Caption</h2>
+      <label class="field">
+        <span>Title</span>
+        <input id="title-input" type="text" value="NEON CITY" maxlength="30" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Subtitle</span>
+        <input id="subtitle-input" type="text" value="Welcome back" maxlength="40" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="group">
+      <h2 id="panel-label">Panel 1 of 3</h2>
+      <label class="slider">
+        <span>Zoom <b id="zoom-val">100%</b></span>
+        <input id="zoom" type="range" min="1" max="2.5" step="0.01" value="1">
+      </label>
+      <label class="slider">
+        <span>Pan X <b id="pan-x-val">0.00</b></span>
+        <input id="pan-x" type="range" min="-0.35" max="0.35" step="0.01" value="0">
+      </label>
+      <label class="slider">
+        <span>Pan Y <b id="pan-y-val">0.00</b></span>
+        <input id="pan-y" type="range" min="-0.35" max="0.35" step="0.01" value="0">
+      </label>
+      <button id="clear-panel" class="btn ghost" type="button">Remove photo from this panel</button>
+    </div>
+  </section>
+
+  <section class="stage" aria-label="Live preview">
+    <canvas id="preview" width="900" height="900"></canvas>
+    <div class="stage-actions">
+      <button id="export-btn" class="btn export" type="button">Export PNG</button>
+      <p class="hint">Exports exactly the size you picked — ready to post.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  Vice Cover is an original tool. It uses no Rockstar Games logo, artwork, character or font.
+  Display type is Anton (SIL Open Font License). Your photos are read on your own machine and never uploaded.
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
